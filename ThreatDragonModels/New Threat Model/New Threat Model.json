@@ -48,8 +48,8 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
-            "id": "097147cc-843f-42a0-ae6b-f91822998f2d",
             "zIndex": -1,
+            "id": "097147cc-843f-42a0-ae6b-f91822998f2d",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "DMZ",
@@ -78,8 +78,8 @@
             },
             "visible": true,
             "shape": "trust-boundary-box",
-            "id": "a646cb0f-1dbc-47db-9f9f-f3be5db139a8",
             "zIndex": -1,
+            "id": "a646cb0f-1dbc-47db-9f9f-f3be5db139a8",
             "data": {
               "type": "tm.BoundaryBox",
               "name": "Trust Boundary",
@@ -89,11 +89,12 @@
               "crossingFlows": [
                 "e4a09ec1-63e1-499f-aa1c-19aefcc5f788",
                 "f1b3b19d-2c32-4be9-bcd9-326f634dca7c",
-                "d5d628e1-b529-49be-b142-58aebc946769",
                 "ebd23465-8180-4a7c-be6e-299b39a158d7",
                 "bb249418-d3c5-498d-b31c-e0beccccb0b9",
                 "12b9a361-f0c1-4390-be3b-5d5767bb54c5",
-                "a79ed771-0c6a-4a5c-8779-5e645c4a4fe3"
+                "a79ed771-0c6a-4a5c-8779-5e645c4a4fe3",
+                "d5d628e1-b529-49be-b142-58aebc946769",
+                "9424044c-baab-46dd-a84d-4d2a0112cc6d"
               ],
               "containedElements": [
                 "e2eb40e4-d464-4837-9fd8-1f4e5decd24e",
@@ -125,6 +126,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 1,
             "ports": {
               "groups": {
                 "top": {
@@ -208,7 +210,6 @@
               ]
             },
             "id": "996d916e-4bb6-4e4c-8d8c-51a8b042210b",
-            "zIndex": 1,
             "data": {
               "type": "tm.Actor",
               "name": "User Browser",
@@ -245,6 +246,7 @@
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 2,
             "ports": {
               "groups": {
                 "top": {
@@ -328,7 +330,6 @@
               ]
             },
             "id": "c7157a72-93af-4b66-ac46-9912337a1c79",
-            "zIndex": 2,
             "data": {
               "type": "tm.Actor",
               "name": "Payment Api ",
@@ -355,13 +356,14 @@
                 "text": "Api Gateway"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 3,
             "ports": {
               "groups": {
                 "top": {
@@ -445,7 +447,6 @@
               ]
             },
             "id": "69fb051e-a9b5-43f7-be52-451cf3db8462",
-            "zIndex": 3,
             "data": {
               "type": "tm.Process",
               "name": "Api Gateway",
@@ -453,12 +454,34 @@
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "handlesCardPayment": false,
               "handlesGoodsOrServices": false,
               "isWebApplication": false,
               "privilegeLevel": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "bd1cbf79-0ca8-4f22-9743-0e77aa63818f",
+                  "title": "Modifikasi Request Body",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Tampering",
+                  "description": "Penyerang mengubah data payload saat transit di jaringan.",
+                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 6,
+                  "score": ""
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 0,
+                "tampering": 2,
+                "repudiation": 0,
+                "informationDisclosure": 0,
+                "denialOfService": 0,
+                "elevationOfPrivilege": 0
+              }
             }
           },
           {
@@ -472,16 +495,17 @@
             },
             "attrs": {
               "text": {
-                "text": "Aith Service"
+                "text": "Auth Service"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 5,
             "ports": {
               "groups": {
                 "top": {
@@ -565,26 +589,47 @@
               ]
             },
             "id": "e2eb40e4-d464-4837-9fd8-1f4e5decd24e",
-            "zIndex": 5,
             "data": {
               "type": "tm.Process",
-              "name": "Aith Service",
+              "name": "Auth Service",
               "description": "",
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "handlesCardPayment": false,
               "handlesGoodsOrServices": false,
               "isWebApplication": false,
               "privilegeLevel": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "22c2d8e3-be5f-433b-8515-2d1bcbd62251",
+                  "title": "Eksploitasi Celah Akses Admin",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Elevation of privilege",
+                  "description": "Pengguna biasa menembus batas wewenang untuk mengakses hak akses admin.",
+                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 7,
+                  "score": ""
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 0,
+                "tampering": 0,
+                "repudiation": 0,
+                "informationDisclosure": 0,
+                "denialOfService": 0,
+                "elevationOfPrivilege": 1
+              }
             }
           },
           {
             "position": {
-              "x": 912,
-              "y": 437.0000000000001
+              "x": 902,
+              "y": 467.0000000000001
             },
             "size": {
               "width": 150,
@@ -602,6 +647,7 @@
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 6,
             "ports": {
               "groups": {
                 "top": {
@@ -685,7 +731,6 @@
               ]
             },
             "id": "44e1ed0b-af0b-452a-94d1-d69684431cda",
-            "zIndex": 6,
             "data": {
               "type": "tm.Process",
               "name": "Payment Gateway",
@@ -699,7 +744,8 @@
               "isWebApplication": false,
               "privilegeLevel": "",
               "threats": []
-            }
+            },
+            "children": []
           },
           {
             "position": {
@@ -715,13 +761,14 @@
                 "text": "Postgre SQL DB"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 7,
             "ports": {
               "groups": {
                 "top": {
@@ -805,7 +852,6 @@
               ]
             },
             "id": "e1d86712-3e2a-4841-8fa9-beb1d5f6fbf4",
-            "zIndex": 7,
             "data": {
               "type": "tm.Actor",
               "name": "Postgre SQL DB",
@@ -813,9 +859,27 @@
               "isTrustBoundary": false,
               "outOfScope": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "providesAuthentication": false,
-              "threats": []
+              "threats": [
+                {
+                  "id": "72277633-4b1e-4df4-baa0-208e1ba075a3",
+                  "title": "Pemalsuan koneksi database",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Spoofing",
+                  "description": "Provide a description for this threat",
+                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 8,
+                  "score": ""
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 1,
+                "repudiation": 0
+              }
             }
           },
           {
@@ -832,13 +896,14 @@
                 "text": "Session Store\n"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
             "visible": true,
             "shape": "actor",
+            "zIndex": 8,
             "ports": {
               "groups": {
                 "top": {
@@ -922,7 +987,6 @@
               ]
             },
             "id": "dae064ae-ca1e-46c2-8095-b48345d784e6",
-            "zIndex": 8,
             "data": {
               "type": "tm.Actor",
               "name": "Session Store\n",
@@ -930,9 +994,27 @@
               "isTrustBoundary": false,
               "outOfScope": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "providesAuthentication": false,
-              "threats": []
+              "threats": [
+                {
+                  "id": "ecdc7d16-c875-43f2-b6d7-00e12024fadb",
+                  "title": "Pencurian token sesi ",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Spoofing",
+                  "description": "Penyerang mencoba memalsukan atau mencuri token sesi aktif yang tersimpan di dalam penyimpanan sesi untuk mengambil alih akun pengguna.",
+                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 10,
+                  "score": ""
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 1,
+                "repudiation": 0
+              }
             }
           },
           {
@@ -987,7 +1069,8 @@
             "shape": "flow",
             "attrs": {
               "line": {
-                "stroke": "#333333",
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "targetMarker": {
                   "name": "block"
                 },
@@ -1008,13 +1091,32 @@
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "isBidirectional": false,
               "isEncrypted": false,
               "isPublicNetwork": false,
               "protocol": "",
-              "threats": [],
-              "trustBoundaryIds": []
+              "threats": [
+                {
+                  "id": "4d54f171-5905-4189-915e-012f87831693",
+                  "title": "Serangan Brute Force Login",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Denial of service",
+                  "description": "Serangan berulang pada halaman masuk untuk melumpuhkan akses pengguna.",
+                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 5,
+                  "score": ""
+                }
+              ],
+              "trustBoundaryIds": [],
+              "threatFrequency": {
+                "tampering": 0,
+                "informationDisclosure": 0,
+                "denialOfService": 2
+              }
             },
             "labels": [
               "1 Login Request HTTPS"
@@ -1029,6 +1131,14 @@
               "y": 240
             },
             "vertices": [
+              {
+                "x": 290,
+                "y": 140
+              },
+              {
+                "x": 330,
+                "y": 160
+              },
               {
                 "x": 360,
                 "y": 170
@@ -1082,142 +1192,6 @@
               "cell": "7d6f5996-04f2-43ea-8481-ba270c7a0ee3",
               "port": "84b1c009-9734-4a5f-88de-256a1de9cf32"
             }
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "red",
-                "strokeWidth": 2.5,
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "7 Payment Request\n",
-              "description": "",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": true,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": [
-                {
-                  "id": "0d4a8d7c-aa5b-4502-b50c-2a73c83c1ea4",
-                  "title": "Ancaman STRIDE baru",
-                  "status": "Open",
-                  "severity": "TBD",
-                  "type": "Tampering",
-                  "description": "Berikan deskripsi untuk ancaman ini",
-                  "mitigation": "Berikan remediasi untuk ancaman ini atau alasan jika status adalah N/A",
-                  "modelType": "STRIDE",
-                  "new": true,
-                  "number": 2,
-                  "score": ""
-                }
-              ],
-              "trustBoundaryIds": [
-                "a646cb0f-1dbc-47db-9f9f-f3be5db139a8"
-              ]
-            },
-            "labels": [
-              "7 Payment Request\n"
-            ],
-            "id": "d5d628e1-b529-49be-b142-58aebc946769",
-            "source": {
-              "x": 1016,
-              "y": 360
-            },
-            "target": {
-              "cell": "44e1ed0b-af0b-452a-94d1-d69684431cda",
-              "port": "84b1c009-9734-4a5f-88de-256a1de9cf32"
-            },
-            "vertices": [
-              {
-                "x": 987,
-                "y": 410
-              }
-            ]
-          },
-          {
-            "shape": "flow",
-            "attrs": {
-              "line": {
-                "stroke": "red",
-                "strokeWidth": 2.5,
-                "targetMarker": {
-                  "name": "block"
-                },
-                "sourceMarker": {
-                  "name": ""
-                },
-                "strokeDasharray": null
-              }
-            },
-            "width": 200,
-            "height": 100,
-            "zIndex": 10,
-            "connector": "smooth",
-            "data": {
-              "type": "tm.Flow",
-              "name": "8 External Payment Data",
-              "description": "",
-              "outOfScope": false,
-              "isTrustBoundary": false,
-              "reasonOutOfScope": "",
-              "hasOpenThreats": true,
-              "isBidirectional": false,
-              "isEncrypted": false,
-              "isPublicNetwork": false,
-              "protocol": "",
-              "threats": [
-                {
-                  "id": "0e44ba9f-0eca-4afd-9654-51b983a56827",
-                  "title": "Ancaman STRIDE baru",
-                  "status": "Open",
-                  "severity": "TBD",
-                  "type": "Tampering",
-                  "description": "Berikan deskripsi untuk ancaman ini",
-                  "mitigation": "Berikan remediasi untuk ancaman ini atau alasan jika status adalah N/A",
-                  "modelType": "STRIDE",
-                  "new": true,
-                  "number": 3,
-                  "score": ""
-                }
-              ],
-              "trustBoundaryIds": []
-            },
-            "labels": [
-              "8 External Payment Data"
-            ],
-            "id": "00f5586a-23ef-41a1-90a8-c66cf7715682",
-            "source": {
-              "x": 280,
-              "y": 500
-            },
-            "target": {
-              "x": 1007,
-              "y": 548
-            },
-            "vertices": [
-              {
-                "x": 490,
-                "y": 500
-              }
-            ]
           },
           {
             "shape": "flow",
@@ -1425,6 +1399,162 @@
             }
           },
           {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "red",
+                "strokeWidth": 2.5,
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "7 Payment Request\n",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": true,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [
+                {
+                  "id": "0d4a8d7c-aa5b-4502-b50c-2a73c83c1ea4",
+                  "title": "Manipulasi Nominal",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Tampering",
+                  "description": "Penyerang mencoba memodifikasi parameter harga atau nominal total pada data permintaan pembayaran yang dikirim dari layanan pesanan.",
+                  "mitigation": "Berikan remediasi untuk ancaman ini atau alasan jika status adalah N/A",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 2,
+                  "score": ""
+                }
+              ],
+              "trustBoundaryIds": [
+                "a646cb0f-1dbc-47db-9f9f-f3be5db139a8"
+              ],
+              "threatFrequency": {
+                "tampering": 1,
+                "informationDisclosure": 0,
+                "denialOfService": 0
+              }
+            },
+            "labels": [
+              "7 Payment Request\n"
+            ],
+            "id": "d5d628e1-b529-49be-b142-58aebc946769",
+            "source": {
+              "x": 1016,
+              "y": 360
+            },
+            "target": {
+              "cell": "44e1ed0b-af0b-452a-94d1-d69684431cda",
+              "port": "84b1c009-9734-4a5f-88de-256a1de9cf32"
+            },
+            "vertices": [
+              {
+                "x": 1016,
+                "y": 407
+              },
+              {
+                "x": 987,
+                "y": 410
+              },
+              {
+                "x": 987,
+                "y": 440
+              }
+            ]
+          },
+          {
+            "shape": "flow",
+            "attrs": {
+              "line": {
+                "stroke": "red",
+                "strokeWidth": 2.5,
+                "targetMarker": {
+                  "name": "block"
+                },
+                "sourceMarker": {
+                  "name": ""
+                },
+                "strokeDasharray": null
+              }
+            },
+            "width": 200,
+            "height": 100,
+            "zIndex": 10,
+            "connector": "smooth",
+            "data": {
+              "type": "tm.Flow",
+              "name": "8 External Payment ",
+              "description": "",
+              "outOfScope": false,
+              "isTrustBoundary": false,
+              "reasonOutOfScope": "",
+              "hasOpenThreats": true,
+              "isBidirectional": false,
+              "isEncrypted": false,
+              "isPublicNetwork": false,
+              "protocol": "",
+              "threats": [
+                {
+                  "id": "569b7000-3b26-4ff4-af3d-b184ce119864",
+                  "title": "Pemalsuan Callback Pembayaran Eksternal",
+                  "status": "Open",
+                  "severity": "TBD",
+                  "type": "Tampering",
+                  "description": "Pihak luar atau penyerang mencoba mengirimkan data notifikasi pembayaran sukses palsu ke gateway pembayaran.",
+                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 4,
+                  "score": ""
+                }
+              ],
+              "trustBoundaryIds": [
+                "a646cb0f-1dbc-47db-9f9f-f3be5db139a8"
+              ],
+              "threatFrequency": {
+                "tampering": 1,
+                "informationDisclosure": 0,
+                "denialOfService": 0
+              }
+            },
+            "labels": [
+              "8 External Payment "
+            ],
+            "id": "9424044c-baab-46dd-a84d-4d2a0112cc6d",
+            "source": {
+              "cell": "44e1ed0b-af0b-452a-94d1-d69684431cda",
+              "port": "7c33ed37-e40b-45b4-a9f0-af7be5e9a5f2"
+            },
+            "target": {
+              "cell": "c7157a72-93af-4b66-ac46-9912337a1c79",
+              "port": "1d1d7c12-67ad-498f-b0d7-c26505ca2480"
+            },
+            "vertices": [
+              {
+                "x": 500,
+                "y": 497
+              }
+            ]
+          },
+          {
             "position": {
               "x": 922,
               "y": 275
@@ -1438,13 +1568,14 @@
                 "text": "Order Service"
               },
               "body": {
-                "stroke": "#333333",
-                "strokeWidth": 1.5,
+                "stroke": "red",
+                "strokeWidth": 2.5,
                 "strokeDasharray": null
               }
             },
             "visible": true,
             "shape": "process",
+            "zIndex": 11,
             "ports": {
               "groups": {
                 "top": {
@@ -1528,7 +1659,6 @@
               ]
             },
             "id": "7d6f5996-04f2-43ea-8481-ba270c7a0ee3",
-            "zIndex": 11,
             "data": {
               "type": "tm.Process",
               "name": "Order Service",
@@ -1536,12 +1666,34 @@
               "outOfScope": false,
               "isTrustBoundary": false,
               "reasonOutOfScope": "",
-              "hasOpenThreats": false,
+              "hasOpenThreats": true,
               "handlesCardPayment": false,
               "handlesGoodsOrServices": false,
               "isWebApplication": false,
               "privilegeLevel": "",
-              "threats": []
+              "threats": [
+                {
+                  "id": "166c6e49-59d8-4153-86ae-d4ecc00649a9",
+                  "title": "Penyangkalan Transaksi Pembelian",
+                  "status": "Open",
+                  "severity": "High",
+                  "type": "Repudiation",
+                  "description": "Bocornya data penting akibat pesan error database yang terlalu detail.",
+                  "mitigation": "Provide remediation for this threat or a reason if status is N/A",
+                  "modelType": "STRIDE",
+                  "new": false,
+                  "number": 9,
+                  "score": ""
+                }
+              ],
+              "threatFrequency": {
+                "spoofing": 0,
+                "tampering": 0,
+                "repudiation": 1,
+                "informationDisclosure": 0,
+                "denialOfService": 0,
+                "elevationOfPrivilege": 0
+              }
             }
           }
         ]
@@ -1549,6 +1701,6 @@
     ],
     "diagramTop": 1,
     "reviewer": "April Rustianto",
-    "threatTop": 3
+    "threatTop": 10
   }
 }
