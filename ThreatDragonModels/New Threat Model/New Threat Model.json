@@ -1516,7 +1516,7 @@
                   "id": "569b7000-3b26-4ff4-af3d-b184ce119864",
                   "title": "Pemalsuan Callback Pembayaran Eksternal",
                   "status": "Open",
-                  "severity": "TBD",
+                  "severity": "High",
                   "type": "Tampering",
                   "description": "Pihak luar atau penyerang mencoba mengirimkan data notifikasi pembayaran sukses palsu ke gateway pembayaran.",
                   "mitigation": "Provide remediation for this threat or a reason if status is N/A",
@@ -1530,7 +1530,7 @@
                 "a646cb0f-1dbc-47db-9f9f-f3be5db139a8"
               ],
               "threatFrequency": {
-                "tampering": 1,
+                "tampering": 2,
                 "informationDisclosure": 0,
                 "denialOfService": 0
               }
@@ -1547,12 +1547,7 @@
               "cell": "c7157a72-93af-4b66-ac46-9912337a1c79",
               "port": "1d1d7c12-67ad-498f-b0d7-c26505ca2480"
             },
-            "vertices": [
-              {
-                "x": 500,
-                "y": 497
-              }
-            ]
+            "vertices": []
           },
           {
             "position": {
